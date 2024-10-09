@@ -18,6 +18,16 @@ func ParseFS(fs fs.FS, patterns ...string) (Template, error) {
 	}, nil
 }
 
+func ParseFSt(fs fs.FS, patterns ...string) (Template, error) {
+	htmlTpl, err := template.ParseFS(fs, patterns...)
+	if err != nil {
+		return Template{}, fmt.Errorf("parsing template: %w", err)
+	}
+	return Template{
+		htmlTpl: htmlTpl,
+	}, nil
+}
+
 func Must(t Template, err error) Template {
 	if err != nil {
 		panic(err)
